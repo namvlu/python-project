@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách Sinh viên</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Danh sách Sinh viên</h1>
+
+    <!-- Nút để thêm sinh viên -->
+    <a href="{{ url_for('insert') }}" style="margin-bottom: 20px; display: inline-block;">
+        <button type="button">Thêm Sinh viên</button>
+    </a>
+
+    <!-- Form để chọn sinh viên xem chi tiết -->
+    <form method="POST" action="{{ url_for('details') }}">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Chọn</th>
+                    <th>MSSV</th>
+                    <th>Họ và Tên</th>
+                    <th>Tuổi</th>
+                    <th>Địa chỉ</th>
+                    <th>Quê quán</th>
+                    <th>Chuyên ngành</th>
+                    <th>Xóa</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td>
+                        <input type="checkbox" name="selected" value="{{ row[0] }}">
+                    </td>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                    <td>{{ row[5] }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('delete', mssv=row[0]) }}" style="margin: 0;">
+                            <button type="submit" onclick="return confirm('Bạn có chắc chắn muốn xóa sinh viên này?')">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit">Xem chi tiết</button>
+    </form>
+</body>
+</html>

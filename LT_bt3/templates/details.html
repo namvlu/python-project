@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết Sinh viên</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Thông tin Chi tiết Sinh viên</h1>
+    {% if data %}
+    <table border="1">
+        <thead>
+            <tr>
+                <th>MSSV</th>
+                <th>Họ và Tên</th>
+                <th>Tuổi</th>
+                <th>Địa chỉ</th>
+                <th>Quê quán</th>
+                <th>Chuyên ngành</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] }}</td>
+                <td>{{ row[5] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Không có sinh viên nào được chọn!</p>
+    {% endif %}
+    <a href="{{ url_for('index') }}">Quay lại danh sách</a>
+</body>
+</html>
