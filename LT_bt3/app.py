@@ -64,7 +64,7 @@ def details():
     conn = get_db_connection()
     cur = conn.cursor()
     if selected_data:
-        query = sql.SQL("SELECT * FROM sinhvien WHERE mssv IN ({})").format(
+        query = sql.SQL("SELECT * FROM sinhvien WHERE id IN ({})").format(
             sql.SQL(', ').join(map(sql.Literal, selected_data))
         )
         cur.execute(query)
